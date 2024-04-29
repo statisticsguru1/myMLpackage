@@ -179,7 +179,8 @@ def load_experimental_dataset(dataset_name):
     data_dir = os.path.join(os.path.dirname(__file__), 'data')
     dataset_file = f"{dataset_name}.csv"  # Assuming datasets are CSV files
     dataset_path = os.path.join(data_dir, dataset_file)
-
+    print(dataset_path)
+    print(data_dir)
     # Check if the dataset file exists
     if os.path.exists(dataset_path):
         # Read the dataset into a pandas DataFrame
