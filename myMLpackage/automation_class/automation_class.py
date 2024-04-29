@@ -14,7 +14,7 @@ class Modelling:
     A class for performing data preprocessing, model training, and evaluation using PyCaret for classification or regression tasks.
 
     Attributes:
-    - file_path (str): The path to the data file.
+    - data (pd.Dataframe): The data to be used.
     - target (str): The name of the target variable.
     - datatypes (str): Indicates whether all data columns are correctly inferred.
     - numeric_features (list): A list of numeric feature names.
@@ -63,7 +63,6 @@ class Modelling:
     - use_gpu (bool): Whether to use GPU for processing.
 
     Methods:
-    - load_data: Load a data file into a DataFrame.
     - calculate_variable_info: Calculate information about variables in the given DataFrame.
     - datypess: Construct a data dictionary with the correct data types provided by the user.
     - determine_model_type: Determine the type of model based on the target variable and feature types.
@@ -96,7 +95,7 @@ class Modelling:
         self.target = target
         self.use_gpu=use_gpu
         self.missing_values_target = self.load_data()[1]
-        self.data = self.load_data()[0]
+        self.data = data
         self.datatypes=datatypes
         self.numeric_features=numeric_features
         self.categorical_features=categorical_features
@@ -150,39 +149,6 @@ class Modelling:
         self.tuned_model=self.tuned_model_results()[0]
         self.tuned_model_performance=self.tuned_model_results()[1]
  
-    def load_data(self, **kwargs):
-        """
-        Load a data file into a DataFrame.
-
-        Parameters:
-        - file_path (str): The path to the data file.
-        - **kwargs: Additional keyword arguments to pass to the appropriate read function.
-
-        Returns:
-        pandas.DataFrame: The loaded DataFrame.
-        """
-        try:
-            # Determine file extension
-            file_ext = self.file_path.split(".")[-1].lower()
-            
-            # Read file based on extension
-            if file_ext == "csv":
-               df = pd.read_csv(self.file_path)
-            elif file_ext == "txt":
-               df = pd.read_table(self.file_path)
-            elif file_ext in ["xls", "xlsx"]:
-               df = pd.read_excel(self.file_path)
-            else:
-                raise ValueError("Unsupported file format. Please provide a CSV, TXT, XLS, or XLSX file.")
-            # Strip column names
-            df.rename(columns=lambda x: x.strip(), inplace=True)
-            missing_values_target = df[self.target].isnull().sum()
-            if missing_values_target > 0:
-               df.dropna(subset=[self.target], inplace=True)
-            return [df,missing_values_target]
-        except Exception as e:
-            print(f"Error loading data: {e}")
-            return None
     def calculate_variable_info(self):
         """
         Calculate information about variables in the given DataFrame.
