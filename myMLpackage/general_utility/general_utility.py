@@ -176,7 +176,7 @@ def load_experimental_dataset(dataset_name):
         FileNotFoundError: If the specified dataset file does not exist.
     """
     # Construct the path to the dataset file
-    data_dir = os.path.join(os.path.dirname(__file__), 'data')
+    data_dir = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'data')
     dataset_file = f"{dataset_name}.csv"  # Assuming datasets are CSV files
     dataset_path = os.path.join(data_dir, dataset_file)
     print(dataset_path)
