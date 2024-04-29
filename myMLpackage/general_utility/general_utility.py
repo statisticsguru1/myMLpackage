@@ -183,7 +183,9 @@ def load_experimental_dataset(dataset_name):
     # Check if the dataset file exists
     if os.path.exists(dataset_path):
         # Read the dataset into a pandas DataFrame
-        return pd.read_csv(dataset_path)
+        df=pd.read_csv(dataset_path)
+        df.rename(columns=lambda x: x.strip(), inplace=True)
+        return df
     else:
         # Raise an error if the dataset file does not exist
         raise FileNotFoundError(f"Dataset '{dataset_name}' not found.")
