@@ -584,38 +584,26 @@ class Modelling:
            cat_tune = regression.tune_model(cat)
            tunedresults=regression.pull(cat_tune)
         return [cat_tune,tunedresults]
-    def prediction(self,new_filepath):
+    def prediction(self,newdata):
         """
         Generate predictions for new data using the tuned model.
 
         Parameters:
-        - new_filepath (str): The path to the new data file.
+        - newdata (pd.DataFrame): prediction data.
 
         Returns:
         DataFrame: A DataFrame containing the predictions.
         """
         try:
-          # Determine file extension
-            file_ext = new_filepath.split(".")[-1].lower()
-            
-            # Read file based on extension
-            if file_ext == "csv":
-               df = pd.read_csv(new_filepath)
-            elif file_ext == "txt":
-               df = pd.read_table(new_filepath)
-            elif file_ext in ["xls", "xlsx"]:
-               df = pd.read_excel(new_filepath)
-            else:
-                raise ValueError("Unsupported file format. Please provide a CSV, TXT, XLS, or XLSX file.")
             # Strip column names
-            df.rename(columns=lambda x: x.strip(), inplace=True)
+            newdata.rename(columns=lambda x: x.strip(), inplace=True)
             if self.target in df.columns:
-               df.rename(columns={self.target:self.target+'_zipper'}, inplace=True)
+               newdata.rename(columns={self.target:self.target+'_zipper'}, inplace=True)
             if self.model_type=='classification':
-               pred=classification.predict_model(self.tuned_model,data=df)
+               pred=classification.predict_model(self.tuned_model,data=newdata)
                pred.rename(columns={self.target+'_zipper':self.target}, inplace=True)
             else:
-              pred=regression.predict_model(self.tuned_model,data=df)
+              pred=regression.predict_model(self.tuned_model,data=newdata)
               pred.rename(columns={self.target+'_zipper':self.target}, inplace=True)
             return pred
         except Exception as e:
