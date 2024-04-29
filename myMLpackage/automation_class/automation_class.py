@@ -656,7 +656,7 @@ class Modelling:
         data=self.data
         target=self.target
         plt.figure(figsize=(10, 6))
-        sns.countplot(data=self.data, x=target,hue=target,xlabel= "{}".format(target), ylabel='count', title="A bar graph of the {} Variable".format(target))
+        sns.countplot(data=self.data, x=self.target, hue=self.target)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
         plt.title(title)
