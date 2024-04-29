@@ -1,3 +1,14 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from io import StringIO
+import pycaret
+from pycaret.datasets import get_data
+from pycaret import classification,regression
+
+import streamlit as st
 
 # get model type
 def model_typ(data,target,dtyps):

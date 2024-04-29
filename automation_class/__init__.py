@@ -104,4 +104,5 @@ Example:
     # Display data head
     data_head = model.data_head()
 """
+
 from .automation_class import *

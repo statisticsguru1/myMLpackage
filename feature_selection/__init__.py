@@ -19,4 +19,5 @@ Configure feature selection settings:
     feature_selection_settings = fs.feature_select(feature_selection=True, feature_selection_method='classic', feature_selection_estimator='randomforest', n_features_to_select=0.3, remove_multicollinearity=True, multicollinearity_threshold=0.8, pca=True, pca_method='kernel', pca_components=10, low_variance_threshold=0.01)
 
 """
+
 from .feature_selection import *

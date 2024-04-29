@@ -1,3 +1,12 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from io import StringIO
+import pycaret
+from pycaret.datasets import get_data
+import streamlit as st
 # feature selection   
 def feature_select(feature_selection=False, feature_selection_method='classic', feature_selection_estimator='lightgbm', n_features_to_select=0.2, remove_multicollinearity=False, multicollinearity_threshold=0.9, pca=False, pca_method='linear', pca_components=None, low_variance_threshold=None):
     """

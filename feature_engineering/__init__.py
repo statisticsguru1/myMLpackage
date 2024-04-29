@@ -19,4 +19,5 @@ Configure feature engineering settings:
     feature_engineering_settings = fe.feature_engineering(polynomial_features=True, polynomial_degree=3, group_features=['feature1', 'feature2'], drop_groups=True, bin_numeric_features=['numeric_feature1', 'numeric_feature2'], rare_to_value=0.05, rare_value='other')
 
 """
+
 from .feature_engineering import *

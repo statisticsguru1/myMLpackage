@@ -1,3 +1,12 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from io import StringIO
+import pycaret
+from pycaret.datasets import get_data
+import streamlit as st
 pd.set_option('display.max_columns', None)
 
 class Modelling:

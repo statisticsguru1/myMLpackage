@@ -44,11 +44,4 @@ target_column = streamlit_wraparounds.render_target(data)
 # Process the selected target column by handling missing values
 processed_data = streamlit_wraparounds.process_target1(data, target_column)
 """
-from ..general_utility.general_utility import *
-from ..Data_preparations.Data_preparations import *
-from ..scaling_and_transformation.scaling_and_transformation import *
-from ..feature_engineering.feature_engineering import *
-from ..feature_selection.feature_selection import *
-from ..modelling.modelling import *
-from ..prediction.prediction import *
 from .streamlit_wraparounds import *
