@@ -597,7 +597,7 @@ class Modelling:
         try:
             # Strip column names
             newdata.rename(columns=lambda x: x.strip(), inplace=True)
-            if self.target in df.columns:
+            if self.target in newdata.columns:
                newdata.rename(columns={self.target:self.target+'_zipper'}, inplace=True)
             if self.model_type=='classification':
                pred=classification.predict_model(self.tuned_model,data=newdata)
@@ -635,9 +635,6 @@ class Modelling:
         column=self.target
         plt.figure(figsize=(15, 10))
         sns.histplot(data=self.data,x=column, bins=bins, cbar=True)
-        plt.title(f"Histogram of {column}")
-        plt.xlabel(column)
-        plt.ylabel("Frequency")
         return plt  
     def plot_countplot(self):
         """
@@ -647,9 +644,6 @@ class Modelling:
         - data (DataFrame): The input dataset.
         - x (str): The column to plot on the x-axis.
         - hue (str, optional): The column to differentiate by color.
-        - xlabel (str, optional): The label for the x-axis.
-        - ylabel (str, optional): The label for the y-axis.
-        - title (str, optional): The title of the plot.
         Returns:
         matplotlib.pyplot.figure: The matplotlib figure object containing the countplot.
         """
@@ -657,9 +651,6 @@ class Modelling:
         target=self.target
         plt.figure(figsize=(10, 6))
         sns.countplot(data=self.data, x=self.target, hue=self.target)
-        plt.xlabel(xlabel)
-        plt.ylabel(ylabel)
-        plt.title(title)
         return plt
     def plot_correlation_matrix(self):
         """
@@ -673,6 +664,7 @@ class Modelling:
         matplotlib.pyplot.figure: The matplotlib figure object containing the correlation matrix heatmap.
         """
         data=self.data
+        dtyps=self.dtyps
         numeric_cols = [col for col in data.columns if col not in (dtyps['categorical_features'] or []) and data[col].dtype != 'object']
         non_numeric_cols = [col for col in (dtyps['numeric_features'] or []) if col in data.columns and data[col].dtype == 'object']
         selected_cols = numeric_cols + non_numeric_cols
