@@ -7,6 +7,7 @@ from io import StringIO
 import pycaret
 from pycaret.datasets import get_data
 import streamlit as st
+from pycaret import regression,classification
 pd.set_option('display.max_columns', None)
 
 class Modelling:
