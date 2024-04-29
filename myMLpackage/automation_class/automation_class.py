@@ -90,12 +90,12 @@ class Modelling:
     - plot_model_PR: Plot the precision-recall curve for classification models.
     - plot_model_feature_importance: Plot feature importance for tree-based models.
     """
-    def __init__(self,data,target,datatypes='No',numeric_features=[],categorical_features=[],date_features=[],text_features=[],ordinal_features=[],ignore_features=[],keep_features=[],imputation_type='simple',numeric_imputation='drop',custom_numeric=5,categorical_imputation='drop',custom_categorical="",iterative_imputation_iters=5,numeric_iterative_imputer=None,categorical_iterative_imputer=None,remov_outliers='Yes',outliers_method="iforest",thresh=0.05,fix_imbalance=False, fix_imbalance_method=None,normalize=False,normalize_method='zscore',transformation=False, transformation_method='yeo-johnson',transform_target=False, transform_target_method='yeo-johnson',polynomial_features=False, polynomial_degree=2, group_features=None, drop_groups=False, bin_numeric_features=None, rare_to_value=None, rare_value='rare',feature_selection=False, feature_selection_method='classic', feature_selection_estimator='lightgbm', n_features_to_select=0.2, remove_multicollinearity=False, multicollinearity_threshold=0.9, pca=False, pca_method='linear', pca_components=None, low_variance_threshold=None,use_gpu=False):
-        self.file_path = file_path
+    def __init__(self, file_path,target,datatypes='No',numeric_features=[],categorical_features=[],date_features=[],text_features=[],ordinal_features=[],ignore_features=[],keep_features=[],imputation_type='simple',numeric_imputation='drop',custom_numeric=5,categorical_imputation='drop',custom_categorical="",iterative_imputation_iters=5,numeric_iterative_imputer=None,categorical_iterative_imputer=None,remov_outliers='Yes',outliers_method="iforest",thresh=0.05,fix_imbalance=False, fix_imbalance_method=None,normalize=False,normalize_method='zscore',transformation=False, transformation_method='yeo-johnson',transform_target=False, transform_target_method='yeo-johnson',polynomial_features=False, polynomial_degree=2, group_features=None, drop_groups=False, bin_numeric_features=None, rare_to_value=None, rare_value='rare',feature_selection=False, feature_selection_method='classic', feature_selection_estimator='lightgbm', n_features_to_select=0.2, remove_multicollinearity=False, multicollinearity_threshold=0.9, pca=False, pca_method='linear', pca_components=None, low_variance_threshold=None,use_gpu=False):
+        self.original_data = data
         self.target = target
         self.use_gpu=use_gpu
-        self.missing_values_target = self.load_data()[1]
-        self.data = data
+        self.missing_values_target = self.process_target()[1]
+        self.data =self.process_target()[0]
         self.datatypes=datatypes
         self.numeric_features=numeric_features
         self.categorical_features=categorical_features
@@ -149,6 +149,27 @@ class Modelling:
         self.tuned_model=self.tuned_model_results()[0]
         self.tuned_model_performance=self.tuned_model_results()[1]
  
+    def process_target(self, **kwargs):
+        """
+        process target variable to remove cases with missing values.
+
+        Parameters:
+        - file_path (str): The path to the data file.
+        - **kwargs: Additional keyword arguments to pass to the appropriate read function.
+
+        Returns:
+        pandas.DataFrame: The loaded DataFrame.
+        """
+        original_data=self.original_data
+        try:
+            missing_values_target = original_data[self.target].isnull().sum()
+            if missing_values_target > 0:
+               original_data.dropna(subset=[self.target], inplace=True)
+            return [original_data,missing_values_target]
+        except Exception as e:
+            print(f"Error loading data: {e}")
+            return None
+          
     def calculate_variable_info(self):
         """
         Calculate information about variables in the given DataFrame.
@@ -684,3 +705,4 @@ class Modelling:
         DataFrame: A DataFrame containing the first n rows of the dataset.
         """
         return data.head(n)
+
