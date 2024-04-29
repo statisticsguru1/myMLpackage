@@ -161,3 +161,29 @@ def plot_correlation_matrix(data, dtyps):
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
     plt.title('Correlation Matrix')
     return plt
+
+def load_experimental_dataset(dataset_name):
+    """
+    Load a dataset from the 'data' directory within the package.
+
+    Args:
+        dataset_name (str): The name of the dataset to load (excluding the file extension).
+
+    Returns:
+        pandas.DataFrame: The loaded dataset as a pandas DataFrame.
+
+    Raises:
+        FileNotFoundError: If the specified dataset file does not exist.
+    """
+    # Construct the path to the dataset file
+    data_dir = os.path.join(os.path.dirname(__file__), 'data')
+    dataset_file = f"{dataset_name}.csv"  # Assuming datasets are CSV files
+    dataset_path = os.path.join(data_dir, dataset_file)
+
+    # Check if the dataset file exists
+    if os.path.exists(dataset_path):
+        # Read the dataset into a pandas DataFrame
+        return pd.read_csv(dataset_path)
+    else:
+        # Raise an error if the dataset file does not exist
+        raise FileNotFoundError(f"Dataset '{dataset_name}' not found.")
