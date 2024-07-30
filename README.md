@@ -17,10 +17,10 @@ most of these modules bundle the inputs into a master data dictionary, which is 
 
 ## Installation
 
-You can install MyMLpackage from `pip install git+https://github.com/wfa19/myMLpackage.git`
+You can install MyMLpackage from `pip install git+https://github.com/statisticsguru1/myMLpackage.git`
 
 ```bash
- pip install git+https://github.com/wfa19/myMLpackage.git
+ pip install git+https://github.com/statisticsguru1/myMLpackage.git
 ```
 ## Usage
 ```bash
