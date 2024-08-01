@@ -107,7 +107,7 @@ model.prediction(newdata)
 help(model)
 ```
 ## Streamlit app
-MyMLpackage also includes a Streamlit app for providing a user-friendly interface where users can load data and configure ML training settings for Pycaret. The Streamlit app can be found in the [streamlitapp](https://github.com/wfa19/streamlitapp)
+MyMLpackage also includes a Streamlit app for providing a user-friendly interface where users can load data and configure ML training settings for Pycaret. The Streamlit app can be found in the [streamlitapp]([)](https://github.com/statisticsguru1/MyStreamlitApp)
  repository. You can run the app directly [here](https://appapp-qnebc74f2xhhqkx2s6ypwr.streamlit.app/) 
 ## License
 This project is licensed under the MIT License.
