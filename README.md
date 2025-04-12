@@ -1,6 +1,6 @@
-# MyMLpackage
+# Machine Learning package
 
-MyMLpackage is a Python package that provides dedicated functions for various operations and settings related to machine learning training. The package consists the following modules:
+This is a Python package that provides dedicated functions for various operations and settings related to machine learning training. The package consists the following modules:
 
 - **General utility** General Function to support other functions in graphing etc
 - **Data Preparation**: Functions to prepare data for machine learning tasks.
